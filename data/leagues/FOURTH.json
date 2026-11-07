@@ -92,6 +92,17 @@
       "Home_Score": 5,
       "Away_Score": 2,
       "Status": "played"
+    },
+    {
+      "Match_ID": "3c53d32a-5845-4559-8bab-d426c52a0f00",
+      "League_ID": "FOURTH",
+      "Week": 4,
+      "Match_Date": "",
+      "Home_Team_ID": "FOURTH_T10",
+      "Away_Team_ID": "FOURTH_T09",
+      "Home_Score": 5,
+      "Away_Score": 2,
+      "Status": "played"
     }
   ],
   "settings": [],
@@ -209,30 +220,30 @@
       "Position": 8
     },
     {
-      "Team_ID": "FOURTH_T09",
-      "Team_Name": "نادي سمالوط",
-      "Logo_URL": "",
-      "Played": 5,
-      "Won": 0,
-      "Drawn": 0,
-      "Lost": 5,
-      "Goals_For": 4,
-      "Goals_Against": 18,
-      "Goal_Difference": -14,
-      "Points": 0,
-      "Position": 9
-    },
-    {
       "Team_ID": "FOURTH_T10",
       "Team_Name": "مركز شباب المدينة",
       "Logo_URL": "",
-      "Played": 4,
-      "Won": 0,
+      "Played": 5,
+      "Won": 1,
       "Drawn": 0,
       "Lost": 4,
-      "Goals_For": 4,
-      "Goals_Against": 19,
-      "Goal_Difference": -15,
+      "Goals_For": 9,
+      "Goals_Against": 21,
+      "Goal_Difference": -12,
+      "Points": 3,
+      "Position": 9
+    },
+    {
+      "Team_ID": "FOURTH_T09",
+      "Team_Name": "نادي سمالوط",
+      "Logo_URL": "",
+      "Played": 6,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 6,
+      "Goals_For": 6,
+      "Goals_Against": 23,
+      "Goal_Difference": -17,
       "Points": 0,
       "Position": 10
     }
