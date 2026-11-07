@@ -1,0 +1,228 @@
+{
+  "success": true,
+  "league": {
+    "League_ID": "SECOND",
+    "League_Name": "القسم الثاني",
+    "Category": "كبار",
+    "Season": "2026/2027",
+    "Region": "",
+    "Current_Week": 0,
+    "Is_Active": true
+  },
+  "teams": [
+    {
+      "Team_ID": "SECOND_T01",
+      "League_ID": "SECOND",
+      "Team_Name": "فريق 01 - القسم الثاني",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "SECOND_T02",
+      "League_ID": "SECOND",
+      "Team_Name": "فريق 02 - القسم الثاني",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "SECOND_T03",
+      "League_ID": "SECOND",
+      "Team_Name": "فريق 03 - القسم الثاني",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "SECOND_T04",
+      "League_ID": "SECOND",
+      "Team_Name": "فريق 04 - القسم الثاني",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "SECOND_T05",
+      "League_ID": "SECOND",
+      "Team_Name": "فريق 05 - القسم الثاني",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "SECOND_T06",
+      "League_ID": "SECOND",
+      "Team_Name": "فريق 06 - القسم الثاني",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "SECOND_T07",
+      "League_ID": "SECOND",
+      "Team_Name": "فريق 07 - القسم الثاني",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "SECOND_T08",
+      "League_ID": "SECOND",
+      "Team_Name": "فريق 08 - القسم الثاني",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "SECOND_T09",
+      "League_ID": "SECOND",
+      "Team_Name": "فريق 09 - القسم الثاني",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "SECOND_T10",
+      "League_ID": "SECOND",
+      "Team_Name": "فريق 10 - القسم الثاني",
+      "Logo_URL": "",
+      "Is_Active": true
+    }
+  ],
+  "matches": [],
+  "settings": [],
+  "standings": [
+    {
+      "Team_ID": "SECOND_T01",
+      "Team_Name": "فريق 01 - القسم الثاني",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 1
+    },
+    {
+      "Team_ID": "SECOND_T02",
+      "Team_Name": "فريق 02 - القسم الثاني",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 2
+    },
+    {
+      "Team_ID": "SECOND_T03",
+      "Team_Name": "فريق 03 - القسم الثاني",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 3
+    },
+    {
+      "Team_ID": "SECOND_T04",
+      "Team_Name": "فريق 04 - القسم الثاني",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 4
+    },
+    {
+      "Team_ID": "SECOND_T05",
+      "Team_Name": "فريق 05 - القسم الثاني",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 5
+    },
+    {
+      "Team_ID": "SECOND_T06",
+      "Team_Name": "فريق 06 - القسم الثاني",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 6
+    },
+    {
+      "Team_ID": "SECOND_T07",
+      "Team_Name": "فريق 07 - القسم الثاني",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 7
+    },
+    {
+      "Team_ID": "SECOND_T08",
+      "Team_Name": "فريق 08 - القسم الثاني",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 8
+    },
+    {
+      "Team_ID": "SECOND_T09",
+      "Team_Name": "فريق 09 - القسم الثاني",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 9
+    },
+    {
+      "Team_ID": "SECOND_T10",
+      "Team_Name": "فريق 10 - القسم الثاني",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 10
+    }
+  ]
+}
