@@ -108,20 +108,6 @@
   "settings": [],
   "standings": [
     {
-      "Team_ID": "FOURTH_T01",
-      "Team_Name": "م.ش. ببا",
-      "Logo_URL": "",
-      "Played": 5,
-      "Won": 4,
-      "Drawn": 1,
-      "Lost": 0,
-      "Goals_For": 16,
-      "Goals_Against": 4,
-      "Goal_Difference": 12,
-      "Points": 13,
-      "Position": 1
-    },
-    {
       "Team_ID": "FOURTH_T02",
       "Team_Name": "م.ش. مطاي",
       "Logo_URL": "",
@@ -133,7 +119,7 @@
       "Goals_Against": 3,
       "Goal_Difference": 7,
       "Points": 9,
-      "Position": 2
+      "Position": 1
     },
     {
       "Team_ID": "FOURTH_T03",
@@ -147,7 +133,7 @@
       "Goals_Against": 6,
       "Goal_Difference": 3,
       "Points": 9,
-      "Position": 3
+      "Position": 2
     },
     {
       "Team_ID": "FOURTH_T04",
@@ -161,7 +147,7 @@
       "Goals_Against": 6,
       "Goal_Difference": 0,
       "Points": 9,
-      "Position": 4
+      "Position": 3
     },
     {
       "Team_ID": "FOURTH_T05",
@@ -175,7 +161,7 @@
       "Goals_Against": 5,
       "Goal_Difference": 4,
       "Points": 7,
-      "Position": 5
+      "Position": 4
     },
     {
       "Team_ID": "FOURTH_T06",
@@ -189,7 +175,7 @@
       "Goals_Against": 6,
       "Goal_Difference": 9,
       "Points": 6,
-      "Position": 6
+      "Position": 5
     },
     {
       "Team_ID": "FOURTH_T07",
@@ -203,6 +189,20 @@
       "Goals_Against": 8,
       "Goal_Difference": -5,
       "Points": 6,
+      "Position": 6
+    },
+    {
+      "Team_ID": "FOURTH_T01",
+      "Team_Name": "م.ش. ببا",
+      "Logo_URL": "",
+      "Played": 1,
+      "Won": 1,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 5,
+      "Goals_Against": 2,
+      "Goal_Difference": 3,
+      "Points": 3,
       "Position": 7
     },
     {
