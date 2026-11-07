@@ -81,21 +81,33 @@
       "Is_Active": true
     }
   ],
-  "matches": [],
+  "matches": [
+    {
+      "Match_ID": "25047fe6-c7e6-4fbe-ad9d-547f4946cebc",
+      "League_ID": "SECOND",
+      "Week": 1,
+      "Match_Date": "",
+      "Home_Team_ID": "SECOND_T01",
+      "Away_Team_ID": "SECOND_T09",
+      "Home_Score": 5,
+      "Away_Score": 2,
+      "Status": "played"
+    }
+  ],
   "settings": [],
   "standings": [
     {
       "Team_ID": "SECOND_T01",
       "Team_Name": "فريق 01 - القسم الثاني",
       "Logo_URL": "",
-      "Played": 0,
-      "Won": 0,
+      "Played": 1,
+      "Won": 1,
       "Drawn": 0,
       "Lost": 0,
-      "Goals_For": 0,
-      "Goals_Against": 0,
-      "Goal_Difference": 0,
-      "Points": 0,
+      "Goals_For": 5,
+      "Goals_Against": 2,
+      "Goal_Difference": 3,
+      "Points": 3,
       "Position": 1
     },
     {
@@ -197,8 +209,8 @@
       "Position": 8
     },
     {
-      "Team_ID": "SECOND_T09",
-      "Team_Name": "فريق 09 - القسم الثاني",
+      "Team_ID": "SECOND_T10",
+      "Team_Name": "فريق 10 - القسم الثاني",
       "Logo_URL": "",
       "Played": 0,
       "Won": 0,
@@ -211,16 +223,16 @@
       "Position": 9
     },
     {
-      "Team_ID": "SECOND_T10",
-      "Team_Name": "فريق 10 - القسم الثاني",
+      "Team_ID": "SECOND_T09",
+      "Team_Name": "فريق 09 - القسم الثاني",
       "Logo_URL": "",
-      "Played": 0,
+      "Played": 1,
       "Won": 0,
       "Drawn": 0,
-      "Lost": 0,
-      "Goals_For": 0,
-      "Goals_Against": 0,
-      "Goal_Difference": 0,
+      "Lost": 1,
+      "Goals_For": 2,
+      "Goals_Against": 5,
+      "Goal_Difference": -3,
       "Points": 0,
       "Position": 10
     }
