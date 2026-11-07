@@ -92,10 +92,35 @@
       "Home_Score": 5,
       "Away_Score": 2,
       "Status": "played"
+    },
+    {
+      "Match_ID": "1c493d46-0619-4811-9388-1fee6502f90e",
+      "League_ID": "Y2007",
+      "Week": 1,
+      "Match_Date": "2026-11-06T22:00:00.000Z",
+      "Home_Team_ID": "Y2007_T07",
+      "Away_Team_ID": "Y2007_T09",
+      "Home_Score": 9,
+      "Away_Score": 2,
+      "Status": "played"
     }
   ],
   "settings": [],
   "standings": [
+    {
+      "Team_ID": "Y2007_T07",
+      "Team_Name": "فريق 07 - مواليد 2007",
+      "Logo_URL": "",
+      "Played": 1,
+      "Won": 1,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 9,
+      "Goals_Against": 2,
+      "Goal_Difference": 7,
+      "Points": 3,
+      "Position": 1
+    },
     {
       "Team_ID": "Y2007_T01",
       "Team_Name": "فريق 01 - مواليد 2007",
@@ -108,7 +133,7 @@
       "Goals_Against": 2,
       "Goal_Difference": 3,
       "Points": 3,
-      "Position": 1
+      "Position": 2
     },
     {
       "Team_ID": "Y2007_T02",
@@ -122,7 +147,7 @@
       "Goals_Against": 0,
       "Goal_Difference": 0,
       "Points": 0,
-      "Position": 2
+      "Position": 3
     },
     {
       "Team_ID": "Y2007_T03",
@@ -136,7 +161,7 @@
       "Goals_Against": 0,
       "Goal_Difference": 0,
       "Points": 0,
-      "Position": 3
+      "Position": 4
     },
     {
       "Team_ID": "Y2007_T04",
@@ -150,7 +175,7 @@
       "Goals_Against": 0,
       "Goal_Difference": 0,
       "Points": 0,
-      "Position": 4
+      "Position": 5
     },
     {
       "Team_ID": "Y2007_T05",
@@ -164,7 +189,7 @@
       "Goals_Against": 0,
       "Goal_Difference": 0,
       "Points": 0,
-      "Position": 5
+      "Position": 6
     },
     {
       "Team_ID": "Y2007_T06",
@@ -178,35 +203,7 @@
       "Goals_Against": 0,
       "Goal_Difference": 0,
       "Points": 0,
-      "Position": 6
-    },
-    {
-      "Team_ID": "Y2007_T07",
-      "Team_Name": "فريق 07 - مواليد 2007",
-      "Logo_URL": "",
-      "Played": 0,
-      "Won": 0,
-      "Drawn": 0,
-      "Lost": 0,
-      "Goals_For": 0,
-      "Goals_Against": 0,
-      "Goal_Difference": 0,
-      "Points": 0,
       "Position": 7
-    },
-    {
-      "Team_ID": "Y2007_T09",
-      "Team_Name": "فريق 09 - مواليد 2007",
-      "Logo_URL": "",
-      "Played": 0,
-      "Won": 0,
-      "Drawn": 0,
-      "Lost": 0,
-      "Goals_For": 0,
-      "Goals_Against": 0,
-      "Goal_Difference": 0,
-      "Points": 0,
-      "Position": 8
     },
     {
       "Team_ID": "Y2007_T10",
@@ -220,7 +217,7 @@
       "Goals_Against": 0,
       "Goal_Difference": 0,
       "Points": 0,
-      "Position": 9
+      "Position": 8
     },
     {
       "Team_ID": "Y2007_T08",
@@ -233,6 +230,20 @@
       "Goals_For": 2,
       "Goals_Against": 5,
       "Goal_Difference": -3,
+      "Points": 0,
+      "Position": 9
+    },
+    {
+      "Team_ID": "Y2007_T09",
+      "Team_Name": "فريق 09 - مواليد 2007",
+      "Logo_URL": "",
+      "Played": 1,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 1,
+      "Goals_For": 2,
+      "Goals_Against": 9,
+      "Goal_Difference": -7,
       "Points": 0,
       "Position": 10
     }
