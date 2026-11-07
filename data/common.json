@@ -1,5 +1,13 @@
 {
   "success": true,
-  "news": [],
+  "news": [
+    {
+      "News_ID": "55f092e8-ca86-4953-8c46-11d9327ae2d7",
+      "Title": "محمد رجب",
+      "Content": "محمد رجب من افضل الاداريين في الشرق الاوسط",
+      "Created_At": "2026-11-07T21:53:08.001Z",
+      "Is_Active": true
+    }
+  ],
   "siteSettings": {}
 }
