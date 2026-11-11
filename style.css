@@ -1,0 +1,310 @@
+/* ==========================================================
+   دوري المنطقة — نشرة المباراة
+   ورق دافئ + حبر أسود + أخضر ملعب + أحمر للتنبيه. ألوان مسطحة، بدون تدرجات ولا توهج.
+   الخط: IBM Plex Sans Arabic (400 / 600 / 700)
+   ========================================================== */
+*{box-sizing:border-box}
+:root{
+  --paper:#f2efe8;--card:#fbfaf6;--ink:#15181b;--ink2:#3a4047;--mute:#6b7075;
+  --line:#d6d1c4;--hover:#eae6da;--soft:#ebe7da;
+  --green:#1d6b3b;--green-d:#134d29;--red:#d23a2c;--pos:#1d6b3b;--neg:#c0372a;
+}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%;overflow-x:hidden;max-width:100%}
+body{margin:0;font-family:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",sans-serif;font-weight:400;font-size:16px;line-height:1.6;color:var(--ink);background:var(--paper);min-height:100vh;overflow-x:clip;max-width:100%}
+a{text-decoration:none;color:inherit}
+button,input,select,textarea{font:inherit}
+img{max-width:100%}
+.hidden{display:none!important}
+.wrap{width:min(1120px,92%);margin-inline:auto}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+
+/* ---------- Header ---------- */
+.topline{display:none}
+.site-header{position:sticky;top:0;z-index:30;height:64px;padding:0 max(4vw,16px);display:flex;align-items:center;justify-content:space-between;gap:16px;background:var(--ink);color:#fff}
+.brand{display:flex;align-items:center;gap:11px;flex-shrink:0}
+.brand-mark{width:38px;height:38px;border-radius:4px;display:grid;place-items:center;font-size:20px;font-weight:700;background:var(--green);color:#fff}
+.brand strong{display:block;font-weight:700;font-size:17px;line-height:1.25}
+.brand small{display:block;color:#aeb4ba;font-size:11px}
+.site-header nav{display:flex;align-items:center;gap:clamp(14px,2.4vw,28px);font-size:14px;font-weight:600;color:#e6e8ea}
+.site-header nav a{padding:4px 0;border-bottom:2px solid transparent}
+.site-header nav a:hover{border-color:var(--red)}
+.header-contact{border:1px solid #5b6168;color:#fff;padding:7px 13px;border-radius:4px;font-size:12px;font-weight:600;white-space:nowrap}
+.header-contact:hover{background:#fff;color:var(--ink)}
+.menu-toggle{display:none;background:none;color:#fff;border:0;font-size:26px;cursor:pointer}
+
+/* ---------- News ticker ---------- */
+.news-ticker{height:44px;background:#24292e;color:#fff;display:flex;align-items:center;gap:12px;padding:0 max(4vw,14px) 0 0;overflow:hidden;position:relative;z-index:15}
+.news-label{height:100%;display:flex;align-items:center;gap:8px;padding:0 18px;background:var(--red);color:#fff;font-weight:700;font-size:13px;white-space:nowrap}
+.news-label i{width:7px;height:7px;background:#fff;border-radius:50%}
+.news-viewport{direction:ltr;flex:1;min-width:0;overflow:hidden;height:100%;display:flex;align-items:center}
+.news-track{display:flex;align-items:center;gap:22px;width:max-content;white-space:nowrap;direction:rtl;animation:tickerLTR 32s linear infinite;will-change:transform}
+.news-track:hover,.news-track.paused{animation-play-state:paused}
+@keyframes tickerLTR{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+.news-item{border:0;background:transparent;color:#fff;font-weight:600;font-size:14px;cursor:pointer;padding:6px 0}
+.news-item:hover{text-decoration:underline}
+.news-separator{color:var(--red);font-size:12px}
+.news-empty{color:#d7dbe0;font-size:13px}
+.news-pause{width:34px;height:30px;flex-shrink:0;border:1px solid #5b6168;border-radius:4px;background:transparent;color:#fff;font-size:15px;cursor:pointer}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;isolation:isolate;overflow:hidden;margin-top:22px;min-height:290px;display:flex;align-items:flex-end;border-radius:4px;background:#10201a url("assets/stadium-bg.webp") center 40%/cover no-repeat}
+.hero:before{content:"";position:absolute;inset:0;z-index:-1;background:rgba(8,18,13,.58)}
+.hero:after{display:none}
+.hero-inner{padding:30px clamp(20px,4vw,44px) 32px;max-width:640px}
+.hero-season{display:block;color:#fff;opacity:.85;font-size:13px;font-weight:600;border-right:3px solid var(--red);padding-right:10px;margin-bottom:12px}
+.hero h1{font-weight:700;font-size:clamp(40px,8vw,72px);line-height:1.15;margin:0 0 8px;color:#fff}
+.hero p{margin:0;color:#e3e7ea;font-size:15px;line-height:1.9;max-width:500px}
+
+/* ---------- Sections ---------- */
+.section{padding-top:44px}
+.section#leagues{min-height:50vh}
+.section-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:15px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--ink)}
+.section-heading h2,.admin-heading h2{font-weight:700;font-size:30px;line-height:1.3;margin:0;color:var(--ink)}
+.section-heading h2 em,.coach-copy h2 em,.admin-heading h2 em{font-style:normal;color:inherit}
+.section-heading p,.admin-heading p{margin:2px 0 0;color:var(--mute);font-size:13px}
+.section-kicker{display:block;font-size:12px;color:var(--red);font-weight:700}
+.live-pill{color:var(--ink2);font-size:12px;font-weight:600;white-space:nowrap}
+.live-pill i{display:inline-block;width:8px;height:8px;background:var(--red);margin-left:6px}
+
+/* ---------- Buttons ---------- */
+.btn{border:2px solid transparent;border-radius:4px;padding:11px 20px;font-weight:700;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:10px;transition:background .15s,color .15s}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.6;cursor:wait}
+.btn-gold{background:var(--ink);color:#fff}
+.btn-gold:hover{background:var(--green)}
+.btn-outline{border-color:currentColor;color:var(--ink);background:transparent}
+.btn-outline:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn-whatsapp{background:#1c8a46;color:#fff}
+.btn-whatsapp:hover{background:#14693a}
+
+/* ---------- League list ---------- */
+.league-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 36px;counter-reset:lc}
+.league-card{position:relative;display:block;text-align:right;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:18px 54px 18px 8px;background:transparent;cursor:pointer;color:var(--ink);counter-increment:lc;transition:background .15s}
+.league-card:before{content:counter(lc,decimal-leading-zero);position:absolute;right:8px;top:19px;font-size:20px;font-weight:700;color:var(--red);font-variant-numeric:tabular-nums}
+.league-card:hover{background:var(--hover)}
+.league-card.active{background:var(--ink);color:#fff}
+.league-card.active:before{color:#fff}
+.league-card.active p{color:#c9ced3}
+.league-card-top{position:absolute;left:10px;top:50%;transform:translateY(-50%)}
+.league-icon{display:none}
+.league-arrow{font-size:20px;color:var(--mute)}
+.league-card.active .league-arrow{color:#fff}
+.league-card h3{font-size:18px;font-weight:700;margin:0 0 2px}
+.league-card p{font-size:12px;color:var(--mute);margin:0}
+.loading-card,.empty-state{grid-column:1/-1;padding:22px;text-align:center;color:var(--mute);background:var(--card);border:1px dashed var(--line);border-radius:4px;font-size:13px}
+
+/* ---------- Selected competition ---------- */
+.competition-section{padding-top:26px}
+.competition-banner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;border-radius:4px;background:var(--green-d);color:#fff}
+.competition-title-wrap{display:flex;flex-direction:column;gap:2px}
+.competition-banner .section-kicker{color:#ffc9c3}
+.competition-banner h2{font-weight:700;font-size:28px;margin:0;line-height:1.3}
+.competition-banner p{margin:0;color:#cfe3d5;font-size:13px}
+.selected-week{align-self:flex-start;margin-top:6px;font-size:12px;font-weight:600;color:#fff;border-right:3px solid var(--red);padding-right:8px}
+.back-leagues{white-space:nowrap;flex-shrink:0;color:#fff}
+.back-leagues:hover{background:#fff;color:var(--green-d);border-color:#fff}
+
+/* ---------- Standings ---------- */
+.table-shell{border:1px solid var(--ink);border-radius:4px;overflow:hidden;background:var(--card)}
+.table-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--ink);background:var(--card)}
+.table-top b{display:block;font-weight:700;font-size:20px;line-height:1.3}
+.table-top small{color:var(--mute);font-size:12px}
+.table-week{font-size:12px;font-weight:700;color:#fff;background:var(--red);padding:3px 10px;border-radius:3px;white-space:nowrap}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.standings-table{width:100%;min-width:560px;border-collapse:separate;border-spacing:0;text-align:center;font-size:14px}
+.standings-table th{background:var(--ink);color:#fff;font-weight:600;font-size:12px;padding:11px 6px;white-space:nowrap}
+.standings-table td{padding:11px 6px;font-weight:600;white-space:nowrap;color:var(--ink);background:var(--card);border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums;direction:ltr}
+.standings-table tbody tr:last-child td{border-bottom:0}
+.standings-table th:nth-child(1),.standings-table td:nth-child(1){position:sticky;right:0;z-index:2;width:46px;min-width:46px}
+.standings-table th:nth-child(2),.standings-table td:nth-child(2){position:sticky;right:46px;z-index:2;text-align:right;box-shadow:-6px 0 6px -6px rgba(0,0,0,.25)}
+.standings-table th:last-child,.standings-table td:last-child{position:sticky;left:0;z-index:2;min-width:64px;box-shadow:6px 0 6px -6px rgba(0,0,0,.25)}
+.standings-table td.team-cell{direction:rtl;text-align:right;font-weight:700;min-width:136px;max-width:210px;overflow:hidden;text-overflow:ellipsis}
+.standings-table .team-col{text-align:right}
+.team-badge{display:none}
+.rank{font-weight:600;color:var(--mute)}
+.standings-table td.rank.top{color:var(--green);font-weight:700;font-size:16px}
+.standings-table tbody tr:nth-child(1) td:first-child{box-shadow:inset -4px 0 0 var(--green)}
+.positive{color:var(--pos)}
+.negative{color:var(--neg)}
+.standings-table tbody tr td.points{background:var(--soft);font-weight:700;font-size:16px}
+.standings-table tbody tr:hover td{background:var(--hover)}
+.standings-table tbody tr:hover td.points{background:#e1dccd}
+.table-legend{display:flex;gap:16px;flex-wrap:wrap;padding:11px 16px;color:var(--mute);font-size:11px;background:var(--paper);border-top:1px solid var(--line)}
+.legend-dot{display:inline-block;width:9px;height:9px;margin-left:5px}
+.legend-dot.gold{background:var(--green)}
+.legend-dot.green{background:var(--ink2)}
+.standings-export{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:16px}
+.standings-export .btn{padding:12px 22px;font-size:14px}
+.standings-export small{font-size:12px;color:var(--mute)}
+
+/* ---------- Matches ---------- */
+.matches-shell{border:1px solid var(--ink);border-radius:4px;overflow:hidden;background:var(--card)}
+.matches-head{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:var(--ink);color:#fff}
+.matches-head b{font-size:15px;font-weight:700}
+.matches-head span{font-size:12px;color:#c9ced3}
+.match-row{display:grid;grid-template-columns:92px 1fr 100px;align-items:center;gap:14px;padding:13px 18px;border-bottom:1px solid var(--line);content-visibility:auto;contain-intrinsic-size:auto 62px}
+.match-row:last-child{border-bottom:0}
+.match-week{font-size:12px;font-weight:600;color:var(--mute)}
+.match-teams{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:12px;font-weight:700;font-size:15px}
+.match-teams span:last-child{text-align:left}
+.score{background:var(--ink);color:#fff;padding:4px 14px;border-radius:3px;font-weight:700;font-size:16px;direction:rtl;unicode-bidi:isolate;white-space:nowrap;font-variant-numeric:tabular-nums}
+.match-date{text-align:left;color:var(--mute);font-size:12px}
+
+/* ---------- Coach ---------- */
+.coach-section{position:relative;display:flex;align-items:center;gap:28px;padding:30px;margin-top:64px;margin-bottom:60px;overflow:hidden;border-radius:4px;background:var(--green-d);color:#fff}
+.coach-photo-wrap{position:relative;width:132px;height:132px;flex-shrink:0}
+.coach-photo{width:100%;height:100%;object-fit:cover;border-radius:4px;border:3px solid var(--paper);display:block}
+.photo-ring{display:none}
+.coach-copy{max-width:600px}
+.coach-copy .section-kicker{color:#ffc9c3}
+.coach-copy h2{font-weight:700;font-size:28px;margin:2px 0 4px;line-height:1.3}
+.coach-copy p{color:#d6e6db;line-height:1.9;font-size:14px;margin:4px 0 14px}
+.coach-official-link{display:inline-block;margin:0 0 14px;color:#fff;font-size:12px;font-weight:600;border-bottom:1px solid rgba(255,255,255,.5);padding-bottom:2px}
+.coach-official-link:hover{border-color:var(--red)}
+.whatsapp-btn{font-size:13px;background:#fff;color:var(--green-d)}
+.whatsapp-btn:hover{background:var(--ink);color:#fff}
+.coach-decoration{display:none}
+
+/* ---------- Footer ---------- */
+.site-footer{background:var(--ink);color:#aeb4ba;padding:22px 0}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:15px}
+.footer-inner p{font-size:12px;margin:0}
+.footer-inner>a:last-child{font-size:12px;color:#fff;font-weight:600;border-bottom:1px solid #5b6168}
+.footer-inner>a:last-child:hover{border-color:var(--red)}
+
+/* ---------- Admin ---------- */
+.admin-fab{position:fixed;bottom:max(20px,env(safe-area-inset-bottom));left:max(16px,env(safe-area-inset-left));width:44px;height:44px;border:0;border-radius:4px;background:var(--ink);color:#fff;font-size:20px;box-shadow:0 2px 8px rgba(0,0,0,.3);z-index:35;cursor:pointer}
+.admin-section{padding:50px 0 70px;background:var(--soft);border-top:2px solid var(--ink)}
+.admin-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.admin-heading h2{font-size:28px}
+.btn-outline-dark{border-color:var(--ink);background:transparent;color:var(--ink)}
+.btn-outline-dark:hover{background:var(--ink);color:#fff}
+select,input,textarea{border:1px solid #b9b3a3;border-radius:4px;padding:10px 12px;background:#fff;color:var(--ink);outline:none;min-width:0}
+select:focus,input:focus,textarea:focus{border-color:var(--ink);box-shadow:0 0 0 2px rgba(21,24,27,.15)}
+.login-card,.admin-card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:20px;color:var(--ink);min-width:0}
+.login-card{max-width:540px}
+.login-card label,.admin-card label{display:flex;flex-direction:column;gap:6px;color:var(--ink2);font-size:13px;font-weight:600}
+.login-row{display:flex;gap:9px;margin:9px 0}.login-row input{flex:1}
+.login-card small,.admin-card small{display:block;color:var(--mute);font-size:11px;margin-top:9px}
+.dashboard-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.admin-status{color:var(--green);font-size:12px;font-weight:700}
+.admin-league-bar{display:flex;align-items:center;gap:12px;background:var(--ink);padding:12px 16px;border-radius:4px;margin-bottom:12px}
+.admin-league-bar label{color:#fff;white-space:nowrap;font-size:12px}
+.admin-league-bar select{min-width:230px}
+.admin-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{border:1px solid var(--ink);background:transparent;color:var(--ink);padding:9px 14px;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer}
+.tab.active{background:var(--ink);color:#fff}
+.tab-content{display:none}.tab-content.active{display:block}
+.admin-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.admin-card h3{margin:0 0 15px;font-size:17px;font-weight:700}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.form-grid input,.form-grid select,.admin-card input,.admin-card select,.admin-card textarea{width:100%;max-width:100%}
+.admin-card>label{margin-bottom:12px}.admin-card>.btn{margin-top:8px}
+.admin-list{display:flex;flex-direction:column;gap:8px;max-height:430px;overflow:auto}
+.admin-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px;border:1px solid var(--line);border-radius:4px;font-size:12px}
+.admin-item>*:first-child{min-width:0;overflow-wrap:anywhere}
+.mini-actions{display:flex;gap:5px;flex-shrink:0}
+.mini-btn{border:1px solid #b9b3a3;background:#fff;color:var(--ink2);border-radius:3px;padding:5px 9px;font-size:11px;cursor:pointer}
+.mini-btn.delete{color:var(--neg);border-color:#e3b8b3}
+.stats-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+/* ---------- Toast + modals ---------- */
+.toast{position:fixed;bottom:22px;right:50%;transform:translate(50%,20px);opacity:0;pointer-events:none;background:var(--ink);color:#fff;padding:11px 18px;border-radius:4px;font-size:13px;box-shadow:0 6px 20px rgba(0,0,0,.3);z-index:100;transition:.25s;max-width:min(90vw,500px);text-align:center}
+.toast.show{opacity:1;transform:translate(50%,0)}
+.news-modal{position:fixed;inset:0;background:rgba(15,18,20,.78);z-index:90;display:grid;place-items:center;padding:20px}
+.news-modal-card{position:relative;background:var(--card);border-top:4px solid var(--red);width:min(560px,100%);border-radius:4px;padding:26px;color:var(--ink)}
+.news-modal-close{position:absolute;left:12px;top:10px;border:0;background:var(--soft);color:var(--ink);border-radius:4px;width:32px;height:32px;font-size:22px;cursor:pointer}
+.news-modal-card h2{font-weight:700;margin:6px 0 8px;font-size:24px;line-height:1.4}
+.news-modal-card p{line-height:2;color:var(--ink2)}
+.news-modal-card small{color:var(--mute)}
+.img-modal{overflow-y:auto;align-items:start}
+.img-modal .news-modal-card{margin:auto;padding:22px 18px}
+.img-modal h2{font-size:22px}
+.img-modal p{margin:0 0 12px;padding:10px 12px;font-size:14px;font-weight:600;line-height:1.8;color:var(--ink);background:#fbe9e6;border-right:3px solid var(--red);border-radius:3px}
+.img-modal img{display:block;width:100%;height:auto;border-radius:4px;border:1px solid var(--line)}
+.img-modal-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.img-modal-actions .btn{flex:1;min-width:130px;padding:12px 10px;font-size:13px}
+
+/* ---------- Tablet ---------- */
+@media(max-width:900px){
+  .site-header nav{gap:14px}
+}
+
+/* ---------- Mobile ---------- */
+@media(max-width:650px){
+  html{scroll-padding-top:70px}
+  .site-header{height:60px;padding:0 14px;gap:10px}
+  .brand-mark{width:36px;height:36px;font-size:18px}
+  .brand strong{font-size:15px}.brand small{font-size:10px}
+  .site-header nav{display:none;position:absolute;top:60px;right:0;left:0;background:#1d2226;padding:10px 20px 14px;flex-direction:column;align-items:stretch;gap:0}
+  .site-header nav.open{display:flex}
+  .site-header nav a{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+  .header-contact{font-size:11px;padding:6px 9px;margin-right:auto}
+  .menu-toggle{display:block;padding:3px}
+  .news-ticker{height:42px;padding:0 8px 0 0;gap:8px}
+  .news-label{font-size:11px;padding:0 11px}.news-pause{width:30px;height:28px}.news-item{font-size:12px}.news-track{gap:14px}
+
+  .hero{min-height:240px;margin-top:14px}
+  .hero-inner{padding:20px 16px 22px}
+  .hero p{font-size:13px;line-height:1.8}
+
+  .section{padding-top:32px}
+  .section-heading{align-items:flex-start;margin-bottom:14px}
+  .section-heading h2{font-size:25px}.section-heading p{font-size:12px}
+  .live-pill{font-size:11px}
+  .league-grid{grid-template-columns:minmax(0,1fr)}
+  .league-card{padding:15px 48px 15px 8px}
+  .league-card:before{top:16px;font-size:18px}
+  .league-card h3{font-size:16px}.league-card p{font-size:11px}
+
+  .competition-section{padding-top:22px}
+  .competition-banner{padding:15px;gap:10px}
+  .competition-banner h2{font-size:22px}.competition-banner p{font-size:12px}
+  .back-leagues{font-size:11px;padding:8px 10px}
+
+  .table-top{padding:11px 13px}.table-top b{font-size:17px}.table-top small{font-size:10px}
+  .standings-table{font-size:13px}
+  .standings-table th{padding:10px 5px}.standings-table td{padding:10px 5px}
+  .standings-table td.team-cell{min-width:120px;max-width:150px}
+  .table-legend{font-size:10px;gap:10px}
+  .standings-export{flex-direction:column;align-items:stretch}
+  .standings-export .btn{width:100%}
+  .standings-export small{font-size:11px;text-align:center}
+
+  .match-row{grid-template-columns:76px 1fr;gap:8px;padding:12px}
+  .match-teams{grid-column:1/-1;grid-row:2;gap:8px;font-size:14px}
+  .match-date{grid-column:2;grid-row:1}
+  .match-week{grid-column:1;grid-row:1}
+
+  .coach-section{margin-top:48px;margin-bottom:40px;padding:18px 16px;gap:16px;align-items:flex-start}
+  .coach-photo-wrap{width:84px;height:84px}
+  .coach-copy h2{font-size:22px}.coach-copy p{font-size:12px}
+  .whatsapp-btn{font-size:11px;padding:10px 12px}
+
+  .footer-inner{flex-wrap:wrap}
+  .footer-inner p{order:3;width:100%;text-align:center}
+  .footer-inner .brand-mark{width:32px;height:32px}
+
+  .admin-fab{bottom:max(14px,env(safe-area-inset-bottom));left:max(12px,env(safe-area-inset-left))}
+  .admin-section{padding:34px 0}
+  .admin-heading h2{font-size:24px}
+  .admin-league-bar{align-items:stretch;flex-direction:column}
+  .admin-league-bar select{width:100%;min-width:0}
+  .admin-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tab{font-size:11px;padding:9px 6px}
+  .admin-grid{grid-template-columns:minmax(0,1fr)}
+  .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .form-grid{gap:10px}
+  .login-row{flex-direction:column}.login-row .btn{width:100%}
+}
+@media(max-width:400px){
+  .brand small,.header-contact span{display:none}
+  .brand strong{font-size:14px}
+  .hero h1{font-size:38px}
+  .standings-table{min-width:520px}
+  .coach-section{flex-direction:column;align-items:center;text-align:center}
+  .section-heading{flex-direction:column;align-items:flex-start}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
