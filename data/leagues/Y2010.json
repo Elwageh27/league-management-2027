@@ -1,0 +1,228 @@
+{
+  "success": true,
+  "league": {
+    "League_ID": "Y2010",
+    "League_Name": "مواليد 2010",
+    "Category": "مواليد",
+    "Season": "2026/2027",
+    "Region": "",
+    "Current_Week": 0,
+    "Is_Active": true
+  },
+  "teams": [
+    {
+      "Team_ID": "Y2010_T01",
+      "League_ID": "Y2010",
+      "Team_Name": "فريق 01 - مواليد 2010",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2010_T02",
+      "League_ID": "Y2010",
+      "Team_Name": "فريق 02 - مواليد 2010",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2010_T03",
+      "League_ID": "Y2010",
+      "Team_Name": "فريق 03 - مواليد 2010",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2010_T04",
+      "League_ID": "Y2010",
+      "Team_Name": "فريق 04 - مواليد 2010",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2010_T05",
+      "League_ID": "Y2010",
+      "Team_Name": "فريق 05 - مواليد 2010",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2010_T06",
+      "League_ID": "Y2010",
+      "Team_Name": "فريق 06 - مواليد 2010",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2010_T07",
+      "League_ID": "Y2010",
+      "Team_Name": "فريق 07 - مواليد 2010",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2010_T08",
+      "League_ID": "Y2010",
+      "Team_Name": "فريق 08 - مواليد 2010",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2010_T09",
+      "League_ID": "Y2010",
+      "Team_Name": "فريق 09 - مواليد 2010",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2010_T10",
+      "League_ID": "Y2010",
+      "Team_Name": "فريق 10 - مواليد 2010",
+      "Logo_URL": "",
+      "Is_Active": true
+    }
+  ],
+  "matches": [],
+  "settings": [],
+  "standings": [
+    {
+      "Team_ID": "Y2010_T01",
+      "Team_Name": "فريق 01 - مواليد 2010",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 1
+    },
+    {
+      "Team_ID": "Y2010_T02",
+      "Team_Name": "فريق 02 - مواليد 2010",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 2
+    },
+    {
+      "Team_ID": "Y2010_T03",
+      "Team_Name": "فريق 03 - مواليد 2010",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 3
+    },
+    {
+      "Team_ID": "Y2010_T04",
+      "Team_Name": "فريق 04 - مواليد 2010",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 4
+    },
+    {
+      "Team_ID": "Y2010_T05",
+      "Team_Name": "فريق 05 - مواليد 2010",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 5
+    },
+    {
+      "Team_ID": "Y2010_T06",
+      "Team_Name": "فريق 06 - مواليد 2010",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 6
+    },
+    {
+      "Team_ID": "Y2010_T07",
+      "Team_Name": "فريق 07 - مواليد 2010",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 7
+    },
+    {
+      "Team_ID": "Y2010_T08",
+      "Team_Name": "فريق 08 - مواليد 2010",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 8
+    },
+    {
+      "Team_ID": "Y2010_T09",
+      "Team_Name": "فريق 09 - مواليد 2010",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 9
+    },
+    {
+      "Team_ID": "Y2010_T10",
+      "Team_Name": "فريق 10 - مواليد 2010",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 10
+    }
+  ]
+}

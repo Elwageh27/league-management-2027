@@ -1,0 +1,343 @@
+// League Management 2026-2027 — static GitHub Pages data + Apps Script admin publishing
+// After deploying the NEW multi-league Apps Script as a Web App, paste its /exec URL here.
+const API_URL = 'https://script.google.com/macros/s/AKfycbzypgyDutIs7dKeS3J0wKA2RTAGVGfjU5MDq3AbahRvvMjfongc841AqGOlSnwxPMqD/exec';
+const $ = id => document.getElementById(id);
+const state = { leagues:[], common:{news:[],siteSettings:{}}, photoNews:[], league:null, selectedId:'FOURTH', isAdmin:false, pin:'', data:null };
+const esc = v => String(v ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num = v => Number(v || 0);
+const weekName = n => ({0:'لم يبدأ',1:'الأول',2:'الثاني',3:'الثالث',4:'الرابع',5:'الخامس',6:'السادس',7:'السابع',8:'الثامن',9:'التاسع',10:'العاشر',11:'الحادي عشر',12:'الثاني عشر'}[n] || String(n));
+function toast(msg){const el=$('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove('show'),3300);}
+function jsonpData(params){
+  return new Promise((resolve,reject)=>{
+    const cb='leagueData_'+Date.now()+'_'+Math.random().toString(36).slice(2,9);
+    const script=document.createElement('script');
+    const timer=setTimeout(()=>{delete window[cb];script.remove();reject(new Error('انتهت مهلة تحميل البيانات'));},20000);
+    window[cb]=data=>{clearTimeout(timer);delete window[cb];script.remove();if(data&&data.success===false)reject(new Error(data.error||'تعذر تحميل البيانات'));else resolve(data);};
+    script.onerror=()=>{clearTimeout(timer);delete window[cb];script.remove();reject(new Error('تعذر الاتصال بمصدر البيانات'));};
+    script.src=API_URL+'?'+new URLSearchParams({...params,callback:cb,_:Date.now()}).toString();
+    document.head.appendChild(script);
+  });
+}
+function normalizeLeague(raw){
+  const l=raw.league||{};
+  const teams=(raw.teams||[]).map(t=>({id:String(t.Team_ID),name:String(t.Team_Name||'فريق'),logo:t.Logo_URL||''}));
+  const matches=(raw.matches||[]).map(m=>({id:String(m.Match_ID),week:num(m.Week),date:m.Match_Date||'',homeId:String(m.Home_Team_ID),awayId:String(m.Away_Team_ID),homeGoals:m.Home_Score===''?'':num(m.Home_Score),awayGoals:m.Away_Score===''?'':num(m.Away_Score),status:String(m.Status||'played')}));
+  const standings=(raw.standings||[]).map(t=>({id:String(t.Team_ID),name:String(t.Team_Name||''),played:num(t.Played),won:num(t.Won),drawn:num(t.Drawn),lost:num(t.Lost),gf:num(t.Goals_For),ga:num(t.Goals_Against),diff:num(t.Goal_Difference),points:num(t.Points),position:num(t.Position)}));
+  const settings={};(raw.settings||[]).forEach(s=>settings[String(s.Setting_Key)]=s.Setting_Value);
+  return {league:{id:String(l.League_ID),name:String(l.League_Name||'مسابقة'),category:String(l.Category||''),season:String(l.Season||'2026/2027'),region:String(l.Region||'منطقة المنيا وبني سويف'),week:num(l.Current_Week)},teams,matches,standings,settings};
+}
+async function loadCommon(){
+  try{
+    const c=await jsonpData({action:'getNews'});
+    state.common={news:(c.news||[]).filter(n=>String(n.Is_Active).toLowerCase()==='true'||n.Is_Active===true).map(n=>({id:String(n.News_ID),title:String(n.Title||''),content:String(n.Content||''),date:n.Created_At||''})),siteSettings:c.siteSettings||{}};
+  }catch(e){state.common={news:[],siteSettings:{}};console.warn(e);}
+  renderNews();
+  await loadPhotoNews();
+}
+async function loadPhotoNews(){
+  try{
+    const result=await jsonpData({action:'getPhotoNews'});
+    state.photoNews=(result.photoNews||[]).filter(n=>String(n.Is_Active).toLowerCase()==='true'||n.Is_Active===true).map(n=>({id:String(n.News_ID),title:String(n.Title||''),content:String(n.Content||''),date:n.Created_At||'',image1:String(n.Image1_URL||''),image2:String(n.Image2_URL||'')}));
+  }catch(e){state.photoNews=[];console.warn('Photo news:',e);}
+  renderPhotoNews();
+}
+function renderPhotoNews(){
+  const grid=$('photoNewsGrid');if(!grid)return;
+  if(!state.photoNews.length){grid.innerHTML='<div class="empty-state photo-news-empty">لا توجد أخبار مصوّرة حاليًا.</div>';}
+  else grid.innerHTML=state.photoNews.map(n=>{
+    const imgs=[n.image1,n.image2].filter(Boolean);
+    return `<article class="photo-news-card" data-photo-news="${esc(n.id)}"><div class="photo-news-media"><img src="${esc(imgs[0])}" alt="${esc(n.title)}" loading="lazy" decoding="async">${imgs.length>1?'<span class="photo-news-image-count">1 / 2</span>':''}</div>${imgs.length>1?`<div class="photo-news-dots" role="group" aria-label="صور الخبر"><button class="photo-news-dot active" type="button" data-photo-index="0" aria-label="الصورة الأولى"></button><button class="photo-news-dot" type="button" data-photo-index="1" aria-label="الصورة الثانية"></button></div>`:''}<div class="photo-news-copy"><h3>${esc(n.title)}</h3><p>${esc(n.content)}</p><small class="photo-news-date">${n.date?new Date(n.date).toLocaleDateString('ar-EG'):'خبر من أخبار المنطقة'}</small></div></article>`;
+  }).join('');
+  grid.querySelectorAll('.photo-news-card').forEach(card=>{
+    const item=state.photoNews.find(n=>n.id===card.dataset.photoNews);if(!item)return;
+    const imgs=[item.image1,item.image2].filter(Boolean);if(imgs.length<2)return;
+    let index=0;const img=card.querySelector('img'),dots=[...card.querySelectorAll('.photo-news-dot')],count=card.querySelector('.photo-news-image-count');
+    const show=i=>{index=i;img.src=imgs[index];dots.forEach((d,j)=>d.classList.toggle('active',j===index));if(count)count.textContent=(index+1)+' / 2';};
+    dots.forEach((d,i)=>d.addEventListener('click',()=>show(i)));
+    let startX=0;const media=card.querySelector('.photo-news-media');
+    media.addEventListener('touchstart',e=>{startX=e.changedTouches[0].clientX;},{passive:true});
+    media.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-startX;if(Math.abs(dx)>35)show(dx<0?1:0);},{passive:true});
+    media.addEventListener('click',()=>show(index===0?1:0));
+  });
+  if(state.isAdmin)renderPhotoNewsAdmin();
+}
+async function loadLeague(id){
+  const raw=await jsonpData({action:'getLeague',leagueId:id});
+  state.data=normalizeLeague(raw);state.selectedId=id;state.league=state.data.league;
+  renderLeague();return state.data;
+}
+function renderLeagueCards(){
+  $('leagueGrid').innerHTML=state.leagues.map((l,i)=>`<button class="league-card ${l.League_ID===state.selectedId?'active':''}" data-league="${esc(l.League_ID)}"><div class="league-card-top"><span class="league-icon">${String(l.Category||'').includes('مواليد')?'👟':'🏆'}</span><span class="league-arrow">←</span></div><h3>${esc(l.League_Name)}</h3><p>${esc(l.Season||'2026/2027')} · ${esc(l.Region||'منطقة المنيا وبني سويف')}</p></button>`).join('');
+  $('adminLeagueSelect').innerHTML=state.leagues.map(l=>`<option value="${esc(l.League_ID)}">${esc(l.League_Name)}</option>`).join('');
+  $('leagueGrid').querySelectorAll('[data-league]').forEach(b=>b.addEventListener('click',()=>selectLeague(b.dataset.league,true)));
+}
+async function selectLeague(id,scroll){
+  try{
+    await loadLeague(id);$('adminLeagueSelect').value=id;
+    $('leagues').classList.add('hidden');
+    $('competitionPanel').classList.remove('hidden');$('standingsSection').classList.remove('hidden');$('matches').classList.remove('hidden');
+    if(scroll)$('competitionPanel').scrollIntoView({behavior:'smooth',block:'start'});
+  }catch(e){toast('تعذر تحميل المسابقة: '+e.message);console.error(e);}
+}
+function renderLeague(){
+  const d=state.data,l=d.league,s=d.standings;
+  $('competitionTitle').textContent=l.name;$('competitionRegion').textContent=l.region||'منطقة المنيا وبني سويف';
+  $('selectedWeek').textContent=l.week?'الأسبوع الحالي: '+weekName(l.week):'لم تبدأ المباريات';
+  $('tableLeagueName').textContent=l.name;$('tableRegion').textContent=l.region||'منطقة المنيا وبني سويف';$('tableWeek').textContent=l.week?'بعد الأسبوع '+weekName(l.week):'لم تبدأ المباريات';
+  $('standingsBody').innerHTML=s.map((t,i)=>`<tr><td class="rank ${i<3?'top':''}">${i+1}</td><td class="team-cell"><span class="team-badge">⚽</span>${esc(t.name)}</td><td>${t.played}</td><td class="positive">${t.won}</td><td>${t.drawn}</td><td>${t.lost}</td><td>${t.gf}</td><td>${t.ga}</td><td class="${t.diff>0?'positive':t.diff<0?'negative':''}">${t.diff>0?'+':''}${t.diff}</td><td class="points">${t.points}</td></tr>`).join('')||'<tr><td colspan="10">لا توجد فرق في هذه المسابقة.</td></tr>';
+  const played=d.matches.filter(m=>m.homeGoals!==''&&m.awayGoals!=='').sort((a,b)=>b.week-a.week);
+  $('matchesCount').textContent=played.length+' مباراة';
+  $('matchesList').innerHTML=played.length?played.map(matchHTML).join(''):'<div class="empty-state">لا توجد نتائج مسجلة حتى الآن.</div>';
+  if(state.isAdmin)renderAdmin();
+}
+function teamName(id){return state.data?.teams.find(t=>t.id===String(id))?.name||'فريق غير معروف';}
+function matchHTML(m){return `<div class="match-row"><span class="match-week">الأسبوع ${m.week}</span><div class="match-teams"><span>${esc(teamName(m.homeId))}</span><b class="score">${m.homeGoals} - ${m.awayGoals}</b><span>${esc(teamName(m.awayId))}</span></div><span class="match-date">${esc(m.date||'')}</span></div>`;}
+function renderNews(){
+ const track=$('newsTrack'),items=state.common.news||[];
+ if(!items.length){track.innerHTML='<span class="news-empty">تابعوا آخر أخبار مسابقات المنطقة</span>';return;}
+ const one=items.map(n=>`<button class="news-item" type="button" data-news-id="${esc(n.id)}">${esc(n.title||n.content)}</button><span class="news-separator">✦</span>`).join('');
+ track.innerHTML=one+one;
+ track.style.animationDuration=Math.max(22,items.reduce((a,n)=>a+(n.title+n.content).length,0)*.17)+'s';
+ track.querySelectorAll('[data-news-id]').forEach(b=>b.addEventListener('click',()=>openNews(b.dataset.newsId)));
+}
+function openNews(id){const n=state.common.news.find(x=>x.id===id);if(!n)return;$('newsModalTitle').textContent=n.title||'خبر البطولة';$('newsModalBody').textContent=n.content;$('newsModalDate').textContent=n.date?new Date(n.date).toLocaleDateString('ar-EG'):'خبر من أخبار المنطقة';$('newsModal').classList.remove('hidden');}
+function jsonpAuth(nonce){
+ return new Promise((resolve,reject)=>{
+  const cb='leagueAuth_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+  const s=document.createElement('script');const timer=setTimeout(()=>{delete window[cb];s.remove();reject(new Error('انتهت مهلة التحقق من الرمز'));},12000);
+  window[cb]=v=>{clearTimeout(timer);delete window[cb];s.remove();resolve(v);};
+  s.onerror=()=>{clearTimeout(timer);delete window[cb];s.remove();reject(new Error('تعذر التحقق من رمز الإدارة'));};
+  s.src=API_URL+'?authCheck='+encodeURIComponent(nonce)+'&callback='+cb+'&_='+Date.now();document.head.appendChild(s);
+ });
+}
+async function verifyPin(pin){
+ const nonce='n'+Date.now().toString(36)+Math.random().toString(36).slice(2,10);
+ await fetch(API_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({action:'verifyPin',pin,nonce})});
+ await new Promise(r=>setTimeout(r,450));
+ const result=await jsonpAuth(nonce);
+ if(!result?.authVerified)throw new Error('رمز الإدارة غير صحيح.');
+}
+async function postAdmin(action,fields={}){
+ if(!state.pin)throw new Error('سجل دخول الإدارة أولًا');
+ await fetch(API_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({action,pin:state.pin,leagueId:state.selectedId,...fields})});
+ // Apps Script returns after the Sheets update; public reads now come directly from Apps Script.
+ const id=state.selectedId;
+ await Promise.all([loadCommon(),loadLeague(id)]);
+ renderLeagueCards();
+}
+function fillTeamSelect(id,selected){
+ const el=$(id);if(!el)return;const old=selected||el.value;
+ el.innerHTML=state.data.teams.map(t=>`<option value="${esc(t.id)}">${esc(t.name)}</option>`).join('');
+ if([...el.options].some(o=>o.value===old))el.value=old;
+}
+function renderAdmin(){
+ const d=state.data;
+ fillTeamSelect('homeTeam');fillTeamSelect('awayTeam');fillTeamSelect('manualTeam');
+ $('matchWeek').value=d.league.week||1;
+ $('adminMatches').innerHTML=d.matches.slice().sort((a,b)=>b.week-a.week).map(m=>`<div class="admin-item"><span>${esc(teamName(m.homeId))} ${m.homeGoals} - ${m.awayGoals} ${esc(teamName(m.awayId))} <small>الأسبوع ${m.week}</small></span><div class="mini-actions"><button class="mini-btn" data-edit-match="${esc(m.id)}">تعديل</button><button class="mini-btn delete" data-delete-match="${esc(m.id)}">حذف</button></div></div>`).join('')||'<div class="empty-state">لا توجد مباريات.</div>';
+ $('adminTeams').innerHTML=d.teams.map(t=>`<div class="admin-item"><span>${esc(t.name)}</span><div class="mini-actions"><button class="mini-btn" data-rename-team="${esc(t.id)}">تعديل</button><button class="mini-btn delete" data-delete-team="${esc(t.id)}">حذف</button></div></div>`).join('');
+ const stat=d.standings.find(t=>t.id===$('manualTeam').value)||d.standings[0];
+ if(stat){$('manualTeam').value=stat.id;[['manualPlayed','played'],['manualWon','won'],['manualDrawn','drawn'],['manualLost','lost'],['manualGF','gf'],['manualGA','ga'],['manualPoints','points']].forEach(([id,k])=>$(id).value=stat[k]);}
+ $('settingTitle').value=d.league.name;$('settingRegion').value=d.league.region;$('settingSeason').value=d.league.season;$('settingWeek').value=d.league.week;
+ $('adminNews').innerHTML=state.common.news.map(n=>`<div class="admin-item"><span>${esc(n.title||n.content)}</span><button class="mini-btn delete" data-delete-news="${esc(n.id)}">حذف</button></div>`).join('')||'<div class="empty-state">لا توجد أخبار منشورة.</div>';
+ renderPhotoNewsAdmin();
+}
+function renderPhotoNewsAdmin(){
+ const list=$('adminPhotoNews');if(!list)return;
+ list.innerHTML=state.photoNews.map(n=>`<div class="admin-item photo-news-admin-item"><img class="photo-news-admin-thumb" src="${esc(n.image1)}" alt=""><span class="photo-news-admin-text">${esc(n.title)}<small>${n.date?new Date(n.date).toLocaleDateString('ar-EG'):''}</small></span><button class="mini-btn delete" data-delete-photo-news="${esc(n.id)}">حذف</button></div>`).join('')||'<div class="empty-state">لا توجد أخبار مصوّرة منشورة.</div>';
+}
+function setAdmin(on){state.isAdmin=on;$('loginCard').classList.toggle('hidden',on);$('dashboard').classList.toggle('hidden',!on);if(on)renderAdmin();}
+async function loadExportAsset(relativePath){
+ return new Promise(resolve=>{
+  const image=new Image();
+  image.onload=()=>resolve(image);
+  image.onerror=()=>resolve(null);
+  image.src=new URL(relativePath,document.baseURI).href;
+ });
+}
+function rrect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+function deliverImage(blob,fileName){
+ const ua=navigator.userAgent||'';
+ const inApp=/FBAN|FBAV|FB_IAB|Instagram|WhatsApp|Messenger|MicroMessenger|Line\/|TikTok|; wv\)/i.test(ua);
+ const url=URL.createObjectURL(blob);
+ if(!inApp){
+  // Normal browsers (Chrome, Safari, desktop…): download straight away.
+  const a=document.createElement('a');a.href=url;a.download=fileName;
+  document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),4000);
+  toast('تم تنزيل صورة الجدول');return;
+ }
+ // Facebook / WhatsApp in-app browsers can't save files: ask to open the site in the real browser.
+ const m=$('imgModal'),pic=$('imgModalPic'),link=$('imgCopyLink'),openB=$('imgOpenBrowser'),android=/Android/i.test(ua);
+ const reader=new FileReader();reader.onload=()=>{pic.src=reader.result;};reader.readAsDataURL(blob);
+ $('imgModalHint').textContent='لازم تفتح الموقع في المتصفح علشان تنزّل الصورة. اضغط «فتح في المتصفح» وبعدها اضغط تنزيل تاني.';
+ openB.onclick=async()=>{
+  if(android){location.href='intent://'+location.host+location.pathname+location.search+'#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url='+encodeURIComponent(location.href)+';end';return;}
+  try{await navigator.clipboard.writeText(location.href);}catch(_){}
+  toast('اضغط ⋯ أو أيقونة المشاركة أعلى الشاشة ثم «فتح في المتصفح / Safari»');
+ };
+ link.onclick=async()=>{try{await navigator.clipboard.writeText(location.href);toast('تم نسخ الرابط — الصقه في متصفح الموبايل');}catch(_){toast('انسخ الرابط يدويًا وافتحه في المتصفح');}};
+ const close=()=>{m.classList.add('hidden');pic.removeAttribute('src');URL.revokeObjectURL(url);};
+ $('imgModalClose').onclick=close;m.onclick=e=>{if(e.target===m)close();};
+ m.classList.remove('hidden');
+}
+async function downloadImage(){
+ const d=state.data;
+ if(!d?.standings?.length){toast('لا يوجد جدول لتحويله إلى صورة');return;}
+ const btn=$('downloadStandingsImage');
+ btn.disabled=true;btn.textContent='جارٍ تجهيز الصورة...';
+ try{
+  try{await Promise.all([document.fonts.load('700 30px "IBM Plex Sans Arabic"'),document.fonts.load('600 30px "IBM Plex Sans Arabic"'),document.fonts.load('400 20px "IBM Plex Sans Arabic"')]);}catch(_){}
+  await document.fonts.ready;
+  const [stadium,coach]=await Promise.all([
+   loadExportAsset('assets/stadium-table.jpg'),
+   loadExportAsset('assets/coach-ragab.jpg')
+  ]);
+  const FONT='"IBM Plex Sans Arabic", Tahoma, sans-serif';
+  const rows=d.standings,W=1600,head=330,th=76,rh=74,foot=210,H=head+th+rows.length*rh+foot;
+  const scale=Math.min(2,Math.sqrt(13e6/(W*H)));
+  const canvas=document.createElement('canvas');canvas.width=Math.round(W*scale);canvas.height=Math.round(H*scale);
+  const ctx=canvas.getContext('2d');ctx.scale(scale,scale);ctx.direction='rtl';
+  const INK='#15181b',PAPER='#fbfaf6',LINE='#d6d1c4',GREEN='#1d6b3b',RED='#d23a2c';
+  // 1) Stadium photo (clean area inside the source frame), cover-fitted, with one flat dark tint.
+  if(stadium){
+   const cx=118,cy=30,cw=1300,ch=658,ratio=Math.max(W/cw,H/ch),sw=W/ratio,sh=H/ratio;
+   ctx.drawImage(stadium,cx+(cw-sw)/2,cy+(ch-sh)/2,sw,sh,0,0,W,H);
+  }else{ctx.fillStyle='#10201a';ctx.fillRect(0,0,W,H);}
+  ctx.fillStyle='rgba(8,18,13,.50)';ctx.fillRect(0,0,W,H);
+  const L=70,R=W-70,tw=R-L;
+  // 2) Heading: season line with red marker, big title, week tag.
+  ctx.textBaseline='middle';ctx.textAlign='right';
+  const season='موسم '+(d.league.season||'2026/2027')+'  ·  '+(d.league.region||'منطقة المنيا وبني سويف');
+  ctx.fillStyle=RED;ctx.fillRect(R-6,72,6,40);
+  ctx.fillStyle='#e8ecef';ctx.font='600 30px '+FONT;ctx.fillText(season,R-24,92);
+  ctx.fillStyle='#ffffff';ctx.font='700 96px '+FONT;ctx.fillText('جدول ترتيب '+d.league.name,R,200,tw-300);
+  const wk=d.league.week?'بعد الأسبوع '+weekName(d.league.week):'بداية المسابقة';
+  ctx.font='700 30px '+FONT;const wkW=ctx.measureText(wk).width+56;
+  rrect(ctx,L,172,wkW,56,6);ctx.fillStyle=RED;ctx.fill();
+  ctx.fillStyle='#fff';ctx.textAlign='center';ctx.fillText(wk,L+wkW/2,201);
+  // 3) Table card.
+  const top=head,cols=[['rank','#',R-44],['name','الفريق',R-96],['played','لعب',984],['won','فاز',872],['drawn','تعادل',760],['lost','خسر',648],['gf','له',536],['ga','عليه',424],['diff','الفارق',303],['points','النقاط',L+80]];
+  ctx.save();rrect(ctx,L,top,tw,th+rows.length*rh,10);ctx.clip();
+  ctx.fillStyle=PAPER;ctx.fillRect(L,top,tw,th+rows.length*rh);
+  ctx.fillStyle=INK;ctx.fillRect(L,top,tw,th);
+  ctx.fillStyle='#ffffff';ctx.font='600 26px '+FONT;
+  cols.forEach(([key,label,px])=>{ctx.textAlign=key==='name'?'right':'center';ctx.fillText(label,px,top+th/2+1);});
+  rows.forEach((t,i)=>{
+   const y=top+th+i*rh,cy2=y+rh/2+1;
+   ctx.fillStyle='#ebe7da';ctx.fillRect(L,y,160,rh);
+   if(i<rows.length-1){ctx.fillStyle=LINE;ctx.fillRect(L,y+rh-1,tw,1);}
+   if(i===0){ctx.fillStyle=GREEN;ctx.fillRect(R-7,y,7,rh);}
+   ctx.textAlign='center';ctx.font=(i<3?'700 30px ':'600 27px ')+FONT;ctx.fillStyle=i<3?GREEN:'#6b7075';ctx.fillText(String(i+1),cols[0][2],cy2);
+   ctx.textAlign='right';ctx.font='700 31px '+FONT;ctx.fillStyle=INK;ctx.fillText(t.name,cols[1][2],cy2,372);
+   const values={played:t.played,won:t.won,drawn:t.drawn,lost:t.lost,gf:t.gf,ga:t.ga,diff:(t.diff>0?'+':'')+t.diff,points:t.points};
+   ctx.direction='ltr';
+   cols.filter(q=>!['rank','name'].includes(q[0])).forEach(([key,,px])=>{
+    ctx.textAlign='center';ctx.font=(key==='points'?'700 36px ':'600 29px ')+FONT;
+    ctx.fillStyle=key==='points'?INK:key==='won'?GREEN:key==='diff'?(t.diff>0?GREEN:t.diff<0?'#c0372a':INK):INK;
+    ctx.fillText('\u200E'+String(values[key]??0),px,cy2);
+   });
+   ctx.direction='rtl';
+  });
+  ctx.restore();
+  // 4) Footer: coach photo (square, white border) + text.
+  const fy=top+th+rows.length*rh,pS=124,pX=R-pS,pY=fy+(foot-pS)/2;
+  if(coach){
+   const size=Math.min(coach.width,coach.height)*.62,sx=Math.max(0,Math.min(coach.width-size,coach.width*.49-size/2)),sy=Math.max(0,Math.min(coach.height-size,coach.height*.30-size/2));
+   ctx.fillStyle='#fff';rrect(ctx,pX-5,pY-5,pS+10,pS+10,8);ctx.fill();
+   ctx.save();rrect(ctx,pX,pY,pS,pS,5);ctx.clip();ctx.drawImage(coach,sx,sy,size,size,pX,pY,pS,pS);ctx.restore();
+  }
+  const tx=pX-28;ctx.textAlign='right';ctx.textBaseline='middle';
+  ctx.fillStyle='#fff';ctx.font='700 46px '+FONT;ctx.fillText('إعداد كابتن رجب الوجيه',tx,pY+30);
+  ctx.fillStyle='#e8ecef';ctx.font='600 27px '+FONT;ctx.fillText('الموقع الرسمي لكابتن رجب الوجيه',tx,pY+76);
+  ctx.fillStyle='#b9c1c8';ctx.font='400 22px '+FONT;ctx.fillText(d.league.name+' · موسم '+d.league.season,tx,pY+110,tx-L);
+  const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));
+  if(!blob)throw new Error('تعذر إنشاء الصورة من المتصفح.');
+  const fileName='ترتيب-'+d.league.id+'-الأسبوع-'+(d.league.week||0)+'.png';
+  deliverImage(blob,fileName);
+ }catch(e){console.error(e);toast('تعذر تجهيز الصورة. افتح الموقع من رابط GitHub Pages وحاول مرة أخرى.');}
+ finally{btn.disabled=false;btn.textContent='▧ تحميل جدول الترتيب كصورة';}
+}
+
+async function fileToPayload(file){
+ if(!file)return null;
+ if(!/^image\/(jpeg|png|webp)$/.test(file.type))throw new Error('اختر صورة JPG أو PNG أو WebP.');
+ if(file.size>3*1024*1024)throw new Error('حجم كل صورة يجب ألا يتجاوز 3 ميجابايت.');
+ const dataUrl=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(String(r.result));r.onerror=()=>reject(new Error('تعذرت قراءة الصورة'));r.readAsDataURL(file);});
+ return {name:file.name,mimeType:file.type,data:dataUrl.split(',')[1]};
+}
+async function postPhotoNews(fields){
+ if(!state.pin)throw new Error('سجل دخول الإدارة أولًا');
+ // no-cors is required for the current Apps Script cross-origin POST flow.
+ await fetch(API_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({action:'addPhotoNews',pin:state.pin,...fields})});
+ await new Promise(r=>setTimeout(r,1800));
+ await loadPhotoNews();
+}
+// Admin events — field names match the current Apps Script API.
+$('loginForm').addEventListener('submit',async e=>{e.preventDefault();const pin=$('password').value.trim();if(!pin)return;const b=e.submitter;b.disabled=true;$('loginNote').textContent='جارٍ التحقق...';try{await verifyPin(pin);state.pin=pin;setAdmin(true);$('password').value='';$('loginNote').textContent='';toast('تم فتح لوحة الإدارة');}catch(err){state.pin='';$('loginNote').textContent=err.message;toast(err.message);}finally{b.disabled=false;}});
+$('logoutBtn').addEventListener('click',()=>{state.pin='';setAdmin(false);toast('تم تسجيل الخروج');});
+$('adminReveal').addEventListener('click',()=>{$('admin').classList.remove('hidden');$('admin').scrollIntoView({behavior:'smooth'});});
+$('closeAdmin').addEventListener('click',()=>$('admin').classList.add('hidden'));
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));b.classList.add('active');$(b.dataset.tab).classList.add('active');}));
+$('adminLeagueSelect').addEventListener('change',e=>selectLeague(e.target.value,false));
+$('backToLeagues').addEventListener('click',()=>{
+ $('competitionPanel').classList.add('hidden');$('standingsSection').classList.add('hidden');$('matches').classList.add('hidden');
+ $('leagues').classList.remove('hidden');$('leagues').scrollIntoView({behavior:'smooth',block:'start'});
+});
+$('matchForm').addEventListener('submit',async e=>{e.preventDefault();const home=$('homeTeam').value,away=$('awayTeam').value;if(home===away){toast('اختار فريقين مختلفين');return;}const b=e.submitter;b.disabled=true;try{await postAdmin('addMatch',{week:num($('matchWeek').value),matchDate:$('matchDate').value,homeTeamId:home,awayTeamId:away,homeScore:num($('homeGoals').value),awayScore:num($('awayGoals').value),status:'played'});$('matchFeedback').textContent='تم إرسال النتيجة. يتم تحديث بيانات GitHub الآن.';toast('تم إرسال المباراة');}catch(err){toast(err.message);}finally{b.disabled=false;}});
+$('adminMatches').addEventListener('click',async e=>{
+ const edit=e.target.dataset.editMatch,del=e.target.dataset.deleteMatch;
+ if(edit){const m=state.data.matches.find(x=>x.id===edit);if(!m)return;const w=prompt('رقم الأسبوع',m.week);if(w===null)return;const hs=prompt('أهداف الفريق الأول',m.homeGoals);if(hs===null)return;const as=prompt('أهداف الفريق الثاني',m.awayGoals);if(as===null)return;try{await postAdmin('editMatch',{matchId:edit,week:num(w),homeScore:num(hs),awayScore:num(as)});toast('تم إرسال تعديل المباراة');}catch(err){toast(err.message);}return;}
+ if(del&&confirm('تأكيد حذف المباراة؟'))try{await postAdmin('deleteMatch',{matchId:del});toast('تم إرسال طلب الحذف');}catch(err){toast(err.message);}
+});
+$('teamForm').addEventListener('submit',async e=>{e.preventDefault();const name=$('newTeamName').value.trim();if(!name)return;try{await postAdmin('addTeam',{teamName:name});$('newTeamName').value='';toast('تم إرسال إضافة الفريق');}catch(err){toast(err.message);}});
+$('adminTeams').addEventListener('click',async e=>{const rename=e.target.dataset.renameTeam,del=e.target.dataset.deleteTeam;if(rename){const t=state.data.teams.find(x=>x.id===rename),name=prompt('الاسم الجديد للفريق',t?.name);if(name?.trim())try{await postAdmin('renameTeam',{teamId:rename,teamName:name.trim()});toast('تم إرسال تعديل الاسم');}catch(err){toast(err.message);}}if(del){if(state.data.matches.some(m=>m.homeId===del||m.awayId===del)){toast('لا يمكن حذف فريق مرتبط بمباريات؛ احذف مبارياته أولًا.');return;}if(confirm('تأكيد حذف الفريق؟'))try{await postAdmin('deleteTeam',{teamId:del});toast('تم إرسال حذف الفريق');}catch(err){toast(err.message);}}});
+$('manualTeam').addEventListener('change',()=>{const t=state.data.standings.find(x=>x.id===$('manualTeam').value);if(!t)return;[['manualPlayed','played'],['manualWon','won'],['manualDrawn','drawn'],['manualLost','lost'],['manualGF','gf'],['manualGA','ga'],['manualPoints','points']].forEach(([id,k])=>$(id).value=t[k]);});
+$('manualStatsForm').addEventListener('submit',async e=>{e.preventDefault();const teamId=$('manualTeam').value;const vals={Played:num($('manualPlayed').value),Won:num($('manualWon').value),Drawn:num($('manualDrawn').value),Lost:num($('manualLost').value),Goals_For:num($('manualGF').value),Goals_Against:num($('manualGA').value),Points:num($('manualPoints').value)};if(vals.Won+vals.Drawn+vals.Lost!==vals.Played){toast('الفوز + التعادل + الخسارة يجب أن يساوي عدد المباريات');return;}try{await postAdmin('updateBaseStats',{teamId,...vals});toast('تم إرسال الرصيد الأساسي');}catch(err){toast(err.message);}});
+$('settingsForm').addEventListener('submit',async e=>{e.preventDefault();try{await postAdmin('updateSettings',{settings:{League_Name:$('settingTitle').value,Region:$('settingRegion').value,Season:$('settingSeason').value},currentWeek:num($('settingWeek').value)});$('settingsFeedback').textContent='تم إرسال الإعدادات.';toast('تم إرسال إعدادات المسابقة');}catch(err){toast(err.message);}});
+$('newsForm').addEventListener('submit',async e=>{e.preventDefault();try{await postAdmin('addNews',{title:$('newsTitle').value.trim(),content:$('newsContent').value.trim()});$('newsTitle').value='';$('newsContent').value='';toast('تم إرسال الخبر المشترك');}catch(err){toast(err.message);}});
+$('adminNews').addEventListener('click',async e=>{const id=e.target.dataset.deleteNews;if(id&&confirm('حذف الخبر من جميع المسابقات؟'))try{await postAdmin('deleteNews',{newsId:id});toast('تم إرسال حذف الخبر');}catch(err){toast(err.message);}});
+$('photoNewsForm').addEventListener('submit',async e=>{
+ e.preventDefault();const btn=$('publishPhotoNewsBtn'),feedback=$('photoNewsFeedback');btn.disabled=true;feedback.textContent='جارٍ تجهيز الصور ورفع الخبر...';
+ try{
+  const image1=await fileToPayload($('photoNewsImage1').files[0]);
+  const image2=await fileToPayload($('photoNewsImage2').files[0]);
+  if(!image1)throw new Error('الصورة الأولى مطلوبة.');
+  await postPhotoNews({title:$('photoNewsTitle').value.trim(),content:$('photoNewsContent').value.trim(),image1,image2});
+  $('photoNewsForm').reset();feedback.textContent='تم إرسال طلب النشر. راجع قائمة الأخبار المصوّرة للتأكد من ظهوره.';toast('تم إرسال الخبر المصوّر');
+ }catch(err){feedback.textContent=err.message;toast(err.message);}
+ finally{btn.disabled=false;}
+});
+$('adminPhotoNews').addEventListener('click',async e=>{
+ const id=e.target.dataset.deletePhotoNews;if(!id)return;
+ if(!confirm('حذف الخبر المصوّر وصوره من الموقع؟'))return;
+ try{
+  await fetch(API_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({action:'deletePhotoNews',pin:state.pin,newsId:id})});
+  await new Promise(r=>setTimeout(r,1200));await loadPhotoNews();toast('تم إرسال طلب حذف الخبر');
+ }catch(err){toast(err.message);}
+});
+$('newsPause').addEventListener('click',()=>{const t=$('newsTrack'),p=t.classList.toggle('paused');$('newsPause').textContent=p?'▶':'Ⅱ';});
+$('newsModalClose').addEventListener('click',()=>$('newsModal').classList.add('hidden'));
+$('newsModal').addEventListener('click',e=>{if(e.target===$('newsModal'))$('newsModal').classList.add('hidden');});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')$('newsModal').classList.add('hidden');});
+$('menuToggle').addEventListener('click',()=>$('mainNav').classList.toggle('open'));
+$('downloadStandingsImage').addEventListener('click',downloadImage);
+$('shareStandingsText').addEventListener('click',()=>{
+ const d=state.data;
+ if(!d?.standings?.length){toast('لا يوجد جدول لمشاركته');return;}
+ const medals=['🥇','🥈','🥉'];
+ const lines=d.standings.map((t,i)=>(medals[i]||(i+1)+'.')+' '+t.name+' — '+t.points+' نقطة ('+t.played+' لعب)');
+ const text='🏆 جدول ترتيب '+d.league.name+(d.league.week?' بعد الأسبوع '+weekName(d.league.week):'')+'\n\n'+lines.join('\n')+'\n\n'+location.origin+location.pathname;
+ window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank','noopener');
+});
+$('yearNow').textContent=new Date().getFullYear();
+async function boot(){
+ try{
+  const list=await jsonpData({});
+  state.leagues=list.leagues||[];
+ }catch(e){console.error(e);toast('تعذر تحميل قائمة المسابقات: '+e.message);return;}
+ renderLeagueCards();
+ await loadCommon();
+ const initial=state.leagues.find(x=>x.League_ID==='FOURTH')||state.leagues[0];
+ if(initial)await selectLeague(initial.League_ID,false);
+}
+boot().catch(e=>{console.error(e);toast('تعذر تحميل الموقع: '+e.message);});

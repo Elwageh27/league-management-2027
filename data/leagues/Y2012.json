@@ -1,0 +1,240 @@
+{
+  "success": true,
+  "league": {
+    "League_ID": "Y2012",
+    "League_Name": "مواليد 2012",
+    "Category": "مواليد",
+    "Season": "2026/2027",
+    "Region": "",
+    "Current_Week": 0,
+    "Is_Active": true
+  },
+  "teams": [
+    {
+      "Team_ID": "Y2012_T01",
+      "League_ID": "Y2012",
+      "Team_Name": "فريق 01 - مواليد 2012",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2012_T02",
+      "League_ID": "Y2012",
+      "Team_Name": "فريق 02 - مواليد 2012",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2012_T03",
+      "League_ID": "Y2012",
+      "Team_Name": "فريق 03 - مواليد 2012",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2012_T04",
+      "League_ID": "Y2012",
+      "Team_Name": "فريق 04 - مواليد 2012",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2012_T05",
+      "League_ID": "Y2012",
+      "Team_Name": "فريق 05 - مواليد 2012",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2012_T06",
+      "League_ID": "Y2012",
+      "Team_Name": "فريق 06 - مواليد 2012",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2012_T07",
+      "League_ID": "Y2012",
+      "Team_Name": "فريق 07 - مواليد 2012",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2012_T08",
+      "League_ID": "Y2012",
+      "Team_Name": "فريق 08 - مواليد 2012",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2012_T09",
+      "League_ID": "Y2012",
+      "Team_Name": "فريق 09 - مواليد 2012",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2012_T10",
+      "League_ID": "Y2012",
+      "Team_Name": "فريق 10 - مواليد 2012",
+      "Logo_URL": "",
+      "Is_Active": true
+    }
+  ],
+  "matches": [
+    {
+      "Match_ID": "9a51f702-8124-49aa-8ad2-c5a78f2b110b",
+      "League_ID": "Y2012",
+      "Week": 1,
+      "Match_Date": "",
+      "Home_Team_ID": "Y2012_T08",
+      "Away_Team_ID": "Y2012_T10",
+      "Home_Score": 5,
+      "Away_Score": 2,
+      "Status": "played"
+    }
+  ],
+  "settings": [],
+  "standings": [
+    {
+      "Team_ID": "Y2012_T08",
+      "Team_Name": "فريق 08 - مواليد 2012",
+      "Logo_URL": "",
+      "Played": 1,
+      "Won": 1,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 5,
+      "Goals_Against": 2,
+      "Goal_Difference": 3,
+      "Points": 3,
+      "Position": 1
+    },
+    {
+      "Team_ID": "Y2012_T01",
+      "Team_Name": "فريق 01 - مواليد 2012",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 2
+    },
+    {
+      "Team_ID": "Y2012_T02",
+      "Team_Name": "فريق 02 - مواليد 2012",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 3
+    },
+    {
+      "Team_ID": "Y2012_T03",
+      "Team_Name": "فريق 03 - مواليد 2012",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 4
+    },
+    {
+      "Team_ID": "Y2012_T04",
+      "Team_Name": "فريق 04 - مواليد 2012",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 5
+    },
+    {
+      "Team_ID": "Y2012_T05",
+      "Team_Name": "فريق 05 - مواليد 2012",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 6
+    },
+    {
+      "Team_ID": "Y2012_T06",
+      "Team_Name": "فريق 06 - مواليد 2012",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 7
+    },
+    {
+      "Team_ID": "Y2012_T07",
+      "Team_Name": "فريق 07 - مواليد 2012",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 8
+    },
+    {
+      "Team_ID": "Y2012_T09",
+      "Team_Name": "فريق 09 - مواليد 2012",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 9
+    },
+    {
+      "Team_ID": "Y2012_T10",
+      "Team_Name": "فريق 10 - مواليد 2012",
+      "Logo_URL": "",
+      "Played": 1,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 1,
+      "Goals_For": 2,
+      "Goals_Against": 5,
+      "Goal_Difference": -3,
+      "Points": 0,
+      "Position": 10
+    }
+  ]
+}

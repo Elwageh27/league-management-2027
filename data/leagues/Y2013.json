@@ -1,0 +1,251 @@
+{
+  "success": true,
+  "league": {
+    "League_ID": "Y2013",
+    "League_Name": "مواليد 2013",
+    "Category": "مواليد",
+    "Season": "2026/2027",
+    "Region": "",
+    "Current_Week": 0,
+    "Is_Active": true
+  },
+  "teams": [
+    {
+      "Team_ID": "Y2013_T01",
+      "League_ID": "Y2013",
+      "Team_Name": "فريق 01 - مواليد 2013",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2013_T02",
+      "League_ID": "Y2013",
+      "Team_Name": "فريق 02 - مواليد 2013",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2013_T03",
+      "League_ID": "Y2013",
+      "Team_Name": "فريق 03 - مواليد 2013",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2013_T04",
+      "League_ID": "Y2013",
+      "Team_Name": "فريق 04 - مواليد 2013",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2013_T05",
+      "League_ID": "Y2013",
+      "Team_Name": "فريق 05 - مواليد 2013",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2013_T06",
+      "League_ID": "Y2013",
+      "Team_Name": "فريق 06 - مواليد 2013",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2013_T07",
+      "League_ID": "Y2013",
+      "Team_Name": "فريق 07 - مواليد 2013",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2013_T08",
+      "League_ID": "Y2013",
+      "Team_Name": "فريق 08 - مواليد 2013",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2013_T09",
+      "League_ID": "Y2013",
+      "Team_Name": "فريق 09 - مواليد 2013",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "Y2013_T10",
+      "League_ID": "Y2013",
+      "Team_Name": "فريق 10 - مواليد 2013",
+      "Logo_URL": "",
+      "Is_Active": true
+    }
+  ],
+  "matches": [
+    {
+      "Match_ID": "1a76c667-dde0-4b1a-9cdc-998f813739af",
+      "League_ID": "Y2013",
+      "Week": 1,
+      "Match_Date": "",
+      "Home_Team_ID": "Y2013_T08",
+      "Away_Team_ID": "Y2013_T10",
+      "Home_Score": 5,
+      "Away_Score": 2,
+      "Status": "played"
+    },
+    {
+      "Match_ID": "2186396c-e705-441e-a8bf-606ca46e0ffb",
+      "League_ID": "Y2013",
+      "Week": 1,
+      "Match_Date": "",
+      "Home_Team_ID": "Y2013_T08",
+      "Away_Team_ID": "Y2013_T10",
+      "Home_Score": 5,
+      "Away_Score": 2,
+      "Status": "played"
+    }
+  ],
+  "settings": [],
+  "standings": [
+    {
+      "Team_ID": "Y2013_T08",
+      "Team_Name": "فريق 08 - مواليد 2013",
+      "Logo_URL": "",
+      "Played": 2,
+      "Won": 2,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 10,
+      "Goals_Against": 4,
+      "Goal_Difference": 6,
+      "Points": 6,
+      "Position": 1
+    },
+    {
+      "Team_ID": "Y2013_T01",
+      "Team_Name": "فريق 01 - مواليد 2013",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 2
+    },
+    {
+      "Team_ID": "Y2013_T02",
+      "Team_Name": "فريق 02 - مواليد 2013",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 3
+    },
+    {
+      "Team_ID": "Y2013_T03",
+      "Team_Name": "فريق 03 - مواليد 2013",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 4
+    },
+    {
+      "Team_ID": "Y2013_T04",
+      "Team_Name": "فريق 04 - مواليد 2013",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 5
+    },
+    {
+      "Team_ID": "Y2013_T05",
+      "Team_Name": "فريق 05 - مواليد 2013",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 6
+    },
+    {
+      "Team_ID": "Y2013_T06",
+      "Team_Name": "فريق 06 - مواليد 2013",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 7
+    },
+    {
+      "Team_ID": "Y2013_T07",
+      "Team_Name": "فريق 07 - مواليد 2013",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 8
+    },
+    {
+      "Team_ID": "Y2013_T09",
+      "Team_Name": "فريق 09 - مواليد 2013",
+      "Logo_URL": "",
+      "Played": 0,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 0,
+      "Goals_Against": 0,
+      "Goal_Difference": 0,
+      "Points": 0,
+      "Position": 9
+    },
+    {
+      "Team_ID": "Y2013_T10",
+      "Team_Name": "فريق 10 - مواليد 2013",
+      "Logo_URL": "",
+      "Played": 2,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 2,
+      "Goals_For": 4,
+      "Goals_Against": 10,
+      "Goal_Difference": -6,
+      "Points": 0,
+      "Position": 10
+    }
+  ]
+}
