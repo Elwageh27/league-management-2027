@@ -1,0 +1,251 @@
+{
+  "success": true,
+  "league": {
+    "League_ID": "FOURTH",
+    "League_Name": "القسم الرابع",
+    "Category": "كبار",
+    "Season": "2026/2027",
+    "Region": "",
+    "Current_Week": 4,
+    "Is_Active": true
+  },
+  "teams": [
+    {
+      "Team_ID": "FOURTH_T01",
+      "League_ID": "FOURTH",
+      "Team_Name": "م.ش. ببا",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "FOURTH_T02",
+      "League_ID": "FOURTH",
+      "Team_Name": "م.ش. مطاي",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "FOURTH_T03",
+      "League_ID": "FOURTH",
+      "Team_Name": "م.ش. مغاغة",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "FOURTH_T04",
+      "League_ID": "FOURTH",
+      "Team_Name": "نادي مغاغة",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "FOURTH_T05",
+      "League_ID": "FOURTH",
+      "Team_Name": "نادي ديرمواس",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "FOURTH_T06",
+      "League_ID": "FOURTH",
+      "Team_Name": "م.ش. الواسطى",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "FOURTH_T07",
+      "League_ID": "FOURTH",
+      "Team_Name": "نادي اهناسيا",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "FOURTH_T08",
+      "League_ID": "FOURTH",
+      "Team_Name": "م.ش. العدوة",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "FOURTH_T09",
+      "League_ID": "FOURTH",
+      "Team_Name": "نادي سمالوط",
+      "Logo_URL": "",
+      "Is_Active": true
+    },
+    {
+      "Team_ID": "FOURTH_T10",
+      "League_ID": "FOURTH",
+      "Team_Name": "مركز شباب المدينة",
+      "Logo_URL": "",
+      "Is_Active": true
+    }
+  ],
+  "matches": [
+    {
+      "Match_ID": "46a5846a-24f1-4e10-b866-bb40e6e1f4e4",
+      "League_ID": "FOURTH",
+      "Week": 4,
+      "Match_Date": "",
+      "Home_Team_ID": "FOURTH_T01",
+      "Away_Team_ID": "FOURTH_T09",
+      "Home_Score": 5,
+      "Away_Score": 2,
+      "Status": "played"
+    },
+    {
+      "Match_ID": "3c53d32a-5845-4559-8bab-d426c52a0f00",
+      "League_ID": "FOURTH",
+      "Week": 4,
+      "Match_Date": "",
+      "Home_Team_ID": "FOURTH_T10",
+      "Away_Team_ID": "FOURTH_T09",
+      "Home_Score": 5,
+      "Away_Score": 2,
+      "Status": "played"
+    }
+  ],
+  "settings": [],
+  "standings": [
+    {
+      "Team_ID": "FOURTH_T02",
+      "Team_Name": "م.ش. مطاي",
+      "Logo_URL": "",
+      "Played": 4,
+      "Won": 3,
+      "Drawn": 0,
+      "Lost": 1,
+      "Goals_For": 10,
+      "Goals_Against": 3,
+      "Goal_Difference": 7,
+      "Points": 9,
+      "Position": 1
+    },
+    {
+      "Team_ID": "FOURTH_T03",
+      "Team_Name": "م.ش. مغاغة",
+      "Logo_URL": "",
+      "Played": 4,
+      "Won": 3,
+      "Drawn": 0,
+      "Lost": 1,
+      "Goals_For": 9,
+      "Goals_Against": 6,
+      "Goal_Difference": 3,
+      "Points": 9,
+      "Position": 2
+    },
+    {
+      "Team_ID": "FOURTH_T04",
+      "Team_Name": "نادي مغاغة",
+      "Logo_URL": "",
+      "Played": 4,
+      "Won": 3,
+      "Drawn": 0,
+      "Lost": 1,
+      "Goals_For": 6,
+      "Goals_Against": 6,
+      "Goal_Difference": 0,
+      "Points": 9,
+      "Position": 3
+    },
+    {
+      "Team_ID": "FOURTH_T05",
+      "Team_Name": "نادي ديرمواس",
+      "Logo_URL": "",
+      "Played": 4,
+      "Won": 2,
+      "Drawn": 1,
+      "Lost": 1,
+      "Goals_For": 9,
+      "Goals_Against": 5,
+      "Goal_Difference": 4,
+      "Points": 7,
+      "Position": 4
+    },
+    {
+      "Team_ID": "FOURTH_T06",
+      "Team_Name": "م.ش. الواسطى",
+      "Logo_URL": "",
+      "Played": 4,
+      "Won": 2,
+      "Drawn": 0,
+      "Lost": 2,
+      "Goals_For": 15,
+      "Goals_Against": 6,
+      "Goal_Difference": 9,
+      "Points": 6,
+      "Position": 5
+    },
+    {
+      "Team_ID": "FOURTH_T07",
+      "Team_Name": "نادي اهناسيا",
+      "Logo_URL": "",
+      "Played": 4,
+      "Won": 2,
+      "Drawn": 0,
+      "Lost": 2,
+      "Goals_For": 3,
+      "Goals_Against": 8,
+      "Goal_Difference": -5,
+      "Points": 6,
+      "Position": 6
+    },
+    {
+      "Team_ID": "FOURTH_T01",
+      "Team_Name": "م.ش. ببا",
+      "Logo_URL": "",
+      "Played": 1,
+      "Won": 1,
+      "Drawn": 0,
+      "Lost": 0,
+      "Goals_For": 5,
+      "Goals_Against": 2,
+      "Goal_Difference": 3,
+      "Points": 3,
+      "Position": 7
+    },
+    {
+      "Team_ID": "FOURTH_T08",
+      "Team_Name": "م.ش. العدوة",
+      "Logo_URL": "",
+      "Played": 4,
+      "Won": 1,
+      "Drawn": 0,
+      "Lost": 3,
+      "Goals_For": 4,
+      "Goals_Against": 5,
+      "Goal_Difference": -1,
+      "Points": 3,
+      "Position": 8
+    },
+    {
+      "Team_ID": "FOURTH_T10",
+      "Team_Name": "مركز شباب المدينة",
+      "Logo_URL": "",
+      "Played": 5,
+      "Won": 1,
+      "Drawn": 0,
+      "Lost": 4,
+      "Goals_For": 9,
+      "Goals_Against": 21,
+      "Goal_Difference": -12,
+      "Points": 3,
+      "Position": 9
+    },
+    {
+      "Team_ID": "FOURTH_T09",
+      "Team_Name": "نادي سمالوط",
+      "Logo_URL": "",
+      "Played": 6,
+      "Won": 0,
+      "Drawn": 0,
+      "Lost": 6,
+      "Goals_For": 6,
+      "Goals_Against": 23,
+      "Goal_Difference": -17,
+      "Points": 0,
+      "Position": 10
+    }
+  ]
+}
